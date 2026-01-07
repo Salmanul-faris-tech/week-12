@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+cpumem=$(ps -eo %cpu,%mem,time,comm)
+
+cpumem=$(printf "%s\n" "$cpumem")
+
+time=$(date +%T)
+
+log="cpumem_$time.log"
+
+printf "%s\n" "$cpumem" > "$log"
+
+cat $log
