@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+ps -eo %mem,pid,user,comm --sort=-%mem | head -n 6
