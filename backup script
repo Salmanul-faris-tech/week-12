@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+src="/home"
+dest="/backup"
+date=$(date +%Y-%M-%D)
+backup_dir="$date/$src"
+
+rsync -av $src $dest
+
+if [ $? -eq 0 ];
+then
+    echo "backup success"
+else
+    echo "backup Failed"
+fi
