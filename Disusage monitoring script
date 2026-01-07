@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+THRESHOLD=50
+df -h | grep /dev/sda1
+
+usage=$(df -h | grep /dev/sda1 | awk '{print $5}' | tr -d %)
+
+if [ "$usage" -ge "$THRESHOLD" ];
+then
+    echo "Alert the disk usage exceeded"
+else
+    echo "The disk usage is Normal"
+fi
