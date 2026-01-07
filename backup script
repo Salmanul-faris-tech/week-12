@@ -3,9 +3,12 @@
 src="/home"
 dest="/backup"
 date=$(date +%Y-%M-%D)
-backup_dir="$date/$src"
+backup_dir="$dest/$date"
 
-rsync -av $src $dest
+mkdir -p "$backup_dir"
+
+
+rsync -av "$src" "$backup_dir"
 
 if [ $? -eq 0 ];
 then
