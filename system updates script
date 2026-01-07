@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+updates=$(apt list --upgradable 2>/dev/null | grep -vc "Listing")
+
+if [ "$updates" -eq 0 ]; then
+    echo "No updates"
+else
+    echo "updates are found"
+    apt list --upgradable
+fi
