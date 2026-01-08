@@ -1,0 +1,67 @@
+1. Understanding User, Group, and Others
+Every file and directory in Linux is assigned to three levels of ownership:
+
+User (u): The individual who owns the file (usually the creator).
+
+Group (g): A collection of users who share specific access to the file.
+
+Others (o): Everyone else on the system who is not the owner or in the group.
+
+2. The Permission Types (rwx)
+There are three basic types of permissions that apply to the categories above:
+
+Read (r): Ability to view file contents or list directory files.
+
+Write (w): Ability to modify/delete a file or add/remove files in a directory.
+
+Execute (x): Ability to run a file as a program or enter a directory.
+
+When you run ls -l, you see these represented as a string like -rwxr-xr--. The first character is the file type (- for file, d for directory), followed by three sets of rwx.
+
+3. Managing Permissions with chmod
+The chmod (change mode) command modifies access rights. You can use Symbolic or Numeric (Octal) notation.
+
+Numeric Notation (The "Math" Way)
+Each permission is assigned a value: Read = 4, Write = 2, Execute = 1.
+
+7 (4+2+1): Full permissions (rwx)
+
+6 (4+2): Read and Write (rw-)
+
+5 (4+1): Read and Execute (r-x)
+
+4: Read only (r--)
+
+Example: chmod 754 filename
+
+7 (User): Full access.
+
+5 (Group): Read and Execute.
+
+4 (Others): Read only.
+
+4. Changing Ownership: chown and chgrp
+Sometimes you need to transfer a file to a different person or department.
+
+chown (change owner): Changes the user who owns the file.
+
+Command: sudo chown john report.txt (Makes "john" the owner).
+
+chgrp (change group): Changes the group ownership.
+
+Command: sudo chgrp developers report.txt.
+
+Pro Tip: You can change both at once with sudo chown john:developers report.txt.
+
+5. Implementing Basic Security Measures
+To keep a Linux system secure, follow the Principle of Least Privilege:
+
+Restrict "Others": Never give "Others" write access to sensitive files (chmod o-w filename).
+
+Protect SSH Keys: Your private keys should always be 600 (Owner can read/write, no one else can do anything).
+
+Use sudo: Avoid logging in as the root user directly; use sudo for administrative tasks to create an audit trail.
+
+Directory Security: Set the "Sticky Bit" on shared folders so users can't delete each other's files (e.g., chmod +t /shared_folder).
+
+Would you like me to create a practice exercise for you to test these commands in a terminal?
