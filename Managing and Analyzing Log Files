@@ -1,0 +1,45 @@
+1. Key Log Files in /var/log
+Most logs are stored in plain text, though some newer systems use binary formats (managed by journalctl).
+
+Log File,Purpose
+/var/log/syslog,"The ""everything"" log for Debian/Ubuntu. It records general system messages, non-critical events, and service activities."
+/var/log/auth.log,"Tracks every authentication event, including successful logins, failed attempts, and sudo command usage. Essential for security audits."
+/var/log/dmesg,"Contains kernel ring buffer messages. It is primarily used to diagnose hardware issues, driver loading, and boot-up events."
+/var/log/messages,"The Red Hat/CentOS equivalent of syslog, used for general system-wide information."
+/var/log/kern.log,Focuses specifically on kernel errors and warnings (useful for debugging custom kernels or hardware).
+
+2. Tools for Viewing and Analyzing Logs
+Because log files can be massive, you rarely use a standard text editor. Instead, you use specialized command-line tools:
+
+cat (Concatenate): Prints the entire file to your screen.
+
+Usage: cat /var/log/auth.log
+
+Best for: Very small files only.
+
+less: The gold standard for reading logs. It opens the file in a "pager" that lets you scroll up and down and search without loading the whole file into memory.
+
+Usage: less /var/log/syslog (Press / to search for a word).
+
+tail: Shows the last few lines of a file.
+
+Usage: tail -n 20 /var/log/syslog (Shows last 20 lines).
+
+Real-time: tail -f /var/log/syslog "follows" the log, showing new lines as they happen.
+
+grep (Global Regular Expression Print): Searches for specific patterns or keywords.
+
+Usage: grep "Failed password" /var/log/auth.log to find all failed login attempts.
+
+3. Log Management Best Practices
+Logs grow continuously, which can fill up your hard drive if left unmanaged.
+
+Log Rotation: Linux uses a tool called logrotate to automatically compress old logs (e.g., syslog.1.gz) and delete the oldest ones after a set period.
+
+Log Analysis Workflow: A typical admin workflow looks like this:
+
+Follow the log in real-time (tail -f).
+
+Filter for specific errors (grep "error").
+
+Investigate the surrounding context of an error using less.
